@@ -1,0 +1,85 @@
+<dependencies>      
+        <dependency>
+            <groupId>de.empulse.eclipselink</groupId>
+            <artifactId>staticweave-maven-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bsc.maven</groupId>
+            <artifactId>maven-processor-plugin</artifactId>
+            <version>4.4-jdk8</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>de.empulse.eclipselink</groupId>
+                <artifactId>staticweave-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>weave</goal>
+                        </goals>
+                        <configuration>
+                            <persistenceXMLLocation>META-INF/persistence.xml</persistenceXMLLocation>
+                            <logLevel>FINE</logLevel>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>org.eclipse.persistence.jpa</artifactId>
+                        <version>2.7.7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>4.4-jdk8</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <!-- Without this, the annotation processor complains about persistence.xml not being present and fail -->
+                            <compilerArguments>-Aeclipselink.persistencexml=src/main/resources/META-INF/persistence.xml</compilerArguments>
+                            <!-- For an unknown reason, the annotation processor is not discovered, have to list it explicitly -->
+                            <processors>
+                                <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor</processor>
+                            </processors>
+                            <!-- source output directory -->
+                            <outputDirectory>${project.build.directory}/generated-sources/meta-model</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <!-- other annotation processors -->
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
