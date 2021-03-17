@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="WARENQuizProject" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.waren.entities.GoogleUserEntity</class>
+    <class>com.waren.entities.RolesEntity</class>
+    <class>com.waren.entities.UsersEntity</class>
+    <class>com.waren.entities.AnswersEntity</class>
+    <class>com.waren.entities.GoogleUserEntity</class>
+    <class>com.waren.entities.QuestionsEntity</class>
+    <class>com.waren.entities.RolesEntity</class>
+    <class>com.waren.entities.UsersEntity</class>
+    <class>com.example.warenquizspringmvc.entities.AnswerKeysEntity</class>
+    <class>com.waren.entities.AnswersEntity</class>
+    <class>com.example.warenquizspringmvc.entities.ClassesEntity</class>
+    <class>com.waren.entities.GoogleUserEntity</class>
+    <class>com.waren.entities.QuestionsEntity</class>
+    <class>com.waren.entities.RolesEntity</class>
+    <class>com.waren.entities.UsersEntity</class>
+    <class>com.example.warenquizspringmvc.entities.AnswerEntity</class>
+    <class>com.example.warenquizspringmvc.entities.CoursesEntity</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=WARENQuiz"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="Nhatrang1"/>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+      <!-- <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.logging.level.sql" value="FINEST"/>
+            <property name="eclipselink.logging.level" value="FINEST" />
+            <property name="eclipselink.logging.level.cache" value="FINEST"/>-->
+      <property name="eclipselink.weaving" value="static"/>
+    </properties>
+  </persistence-unit>
+</persistence>
